@@ -20,14 +20,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Checking for updates..."
           if ! git checkout origin/update build.md; then
-            echo "first time building!"
+            echo "First time building!"
             echo "SHOULD_BUILD=1" >> $GITHUB_OUTPUT
           else
+            echo "Running config update check..."
             UPDATE_CFG=$(./build.sh config.toml --config-update)
+            echo "UPDATE_CFG=$UPDATE_CFG"  # Debug output
             if [ "$UPDATE_CFG" ]; then
+              echo "Updates detected, building..."
               echo "SHOULD_BUILD=1" >> $GITHUB_OUTPUT
             else
+              echo "No updates detected, skipping build..."
               echo "SHOULD_BUILD=0" >> $GITHUB_OUTPUT
             fi
           fi
@@ -36,6 +41,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Clearing older runs..."
           gh run list -L400 --json databaseId -q '.[].databaseId' | tail -n+10 | xargs -IID gh api "repos/$GITHUB_REPOSITORY/actions/runs/ID" -X DELETE || :
 
     outputs:
