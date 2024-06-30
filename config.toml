@@ -7,7 +7,6 @@ enable-magisk-update = true   # set this to false if you do not want to receive 
 # you can use rvmm-config-gen to generate a config
 
 [YouTube]
-enabled = true
 build-mode = "both"
 excluded-patches = "'Custom branding icon YouTube' 'Custom branding name YouTube'"
 included-patches = "'Add splash animation' 'MaterialYou'"
@@ -20,3 +19,14 @@ build-mode = "both"
 excluded-patches = "'Custom branding icon YouTube Music' 'Custom branding name YouTube Music'"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
 arch = "both"
+
+[YouTube_inotia00]
+apkmirror-dlurl = "https://apkmirror.com/apk/google-inc/youtube/"
+patches-source = "inotia00/revanced-patches"
+integrations-source = "inotia00/revanced-integrations"
+cli-source = "E85Addict/revanced-cli"
+rv-brand = "inotia00 ReVanced"
+build-mode = "both"
+included-patches = "'Visual preferences icons'"
+excluded-patches = "'Custom branding icon for YouTube' 'Custom branding name for YouTube'"
+prerelease = true
